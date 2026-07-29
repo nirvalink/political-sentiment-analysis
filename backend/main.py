@@ -11,3 +11,6 @@ for i in range(len(posts)):
     print(f"\nPost {i+1}")
     print("Sentiment:", report["sentiment"][i])
     print("Emotion :", report["emotion"][i])
+
+print("\nTop Keywords")
+print(report["keywords"])
