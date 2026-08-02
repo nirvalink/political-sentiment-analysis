@@ -1,85 +1,43 @@
-# 🗳️ AI-Powered Political Sentiment Analysis
+# Political Sentiment Analysis
 
-An AI-powered Natural Language Processing (NLP) application that analyzes political discussions from social media posts to understand public opinion. The system identifies overall sentiment, detects emotions, and extracts the most important discussion topics using state-of-the-art transformer models.
+An AI-powered Political Sentiment Analysis system that collects live political news, filters articles based on a target topic (currently **Paper Leak**), and performs NLP analysis using state-of-the-art transformer models.
 
 ---
 
-## 📌 Overview
+## Features
 
-Political discussions on social media generate thousands of opinions every day. Manually understanding public perception is difficult and time-consuming.
-
-This project automates the process by analyzing political text using multiple NLP models and producing structured insights including:
-
+- Live News Collection using RSS
+- Automatic Article Extraction
+- Topic-based Filtering (Paper Leak)
 - Sentiment Analysis
 - Emotion Detection
 - Keyword Extraction
-
-The project is designed with a modular architecture so additional AI capabilities can be integrated easily in future versions.
-
----
-
-## ✨ Features
-
-- ✅ Political text sentiment analysis
-- ✅ Emotion detection using Transformer models
-- ✅ Automatic keyword extraction
-- ✅ Structured AI report generation
-- ✅ Modular AI pipeline
-- ✅ Easily extendable architecture
+- Modular AI Pipeline
+- Built with Python
 
 ---
 
-## 🧠 AI Models Used
-
-### 1. Sentiment Analysis
-**Model:**
-`cardiffnlp/twitter-roberta-base-sentiment-latest`
-
-Predicts whether political text is:
-
-- Positive
-- Neutral
-- Negative
-
----
-
-### 2. Emotion Detection
-
-**Model:**
-`j-hartmann/emotion-english-distilroberta-base`
-
-Detects emotions such as:
-
-- Joy
-- Anger
-- Fear
-- Sadness
-- Surprise
-- Disgust
-- Neutral
-
----
-
-### 3. Keyword Extraction
-
-A lightweight keyword extraction module identifies the most frequently discussed topics after removing stopwords and unnecessary punctuation.
-
----
-
-## 🏗️ Project Structure
+## Project Structure
 
 ```
-Political-Sentiment-Analysis/
+backend/
 │
 ├── app/
 │   ├── ai/
 │   │   ├── sentiment.py
 │   │   ├── emotion.py
 │   │   ├── keywords.py
-│   │   └── pipeline.py
 │   │
-│   ├── data/
-│   └── utils/
+│   ├── collector/
+│   │   ├── rss_collector.py
+│   │   ├── topic_filter.py
+│   │   └── political_filter.py
+│   │
+│   ├── analytics/
+│   │   └── political_score.py
+│   │
+│   └── services/
+│       └── pipeline.py
 │
 ├── main.py
 ├── requirements.txt
@@ -88,42 +46,144 @@ Political-Sentiment-Analysis/
 
 ---
 
-## ⚙️ Tech Stack
+# AI Models Used
 
-### Programming Language
+## 1. Sentiment Analysis
 
-- Python
+Model
 
-### Libraries
+```
+cardiffnlp/twitter-roberta-base-sentiment-latest
+```
 
-- Transformers
-- PyTorch
-- NLTK
-- NumPy
+Predicts
+
+- Positive
+- Neutral
+- Negative
 
 ---
 
-## 🚀 Installation
+## 2. Emotion Detection
 
-Clone the repository
+Model
 
-```bash
-git clone https://github.com/<YOUR_USERNAME>/political-sentiment-analysis.git
+```
+j-hartmann/emotion-english-distilroberta-base
 ```
 
-Navigate into the project
+Predicts emotions such as
 
-```bash
-cd political-sentiment-analysis
+- Joy
+- Anger
+- Sadness
+- Fear
+- Disgust
+- Surprise
+- Neutral
+
+---
+
+## 3. Keyword Extraction
+
+Uses
+
+```
+KeyBERT
 ```
 
-Install dependencies
+with
+
+```
+all-MiniLM-L6-v2
+```
+
+---
+
+# Current Pipeline
+
+```
+Indian Express RSS
+        │
+        ▼
+Download Full Article
+        │
+        ▼
+Paper Leak Filter
+        │
+        ▼
+Sentiment Analysis
+        │
+        ▼
+Emotion Detection
+        │
+        ▼
+Keyword Extraction
+        │
+        ▼
+AI Report
+```
+
+---
+
+# Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/nirvalink/political-sentiment-analysis.git
+```
+
+```bash
+cd political-sentiment-analysis/backend
+```
+
+---
+
+## Create Virtual Environment
+
+Windows
+
+```bash
+python -m venv venv
+```
+
+Activate
+
+```bash
+venv\Scripts\activate
+```
+
+---
+
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the project
+---
+
+# Required Python Packages
+
+If requirements.txt is unavailable
+
+```bash
+pip install transformers
+pip install torch
+pip install sentence-transformers
+pip install keybert
+pip install newspaper4k
+pip install feedparser
+pip install lxml_html_clean
+pip install nltk
+```
+
+---
+
+# Run the Project
+
+From the backend folder
 
 ```bash
 python main.py
@@ -131,60 +191,81 @@ python main.py
 
 ---
 
-## 📊 Sample Output
+# Expected Output
 
 ```
+PAPER LEAK INTELLIGENCE REPORT
+
+Article
+
+Title:
+...
+
 Sentiment:
-Positive
+Negative
 
 Emotion:
-Joy
+Anger
 
-Top Keywords:
-election
-government
-development
-economy
-jobs
+Keywords:
+paper leak
+UKSSSC
+ED
+Recruitment
+Question Paper
 ```
 
 ---
 
-## 🎯 Future Improvements
+# Current Topic
 
-- Interactive dashboard
-- Data visualization
-- Political trend analysis
-- Live Twitter/News integration
-- Timeline sentiment tracking
-- PDF report generation
-- Comparative party analysis
-- Topic modeling
-- Named Entity Recognition (NER)
+The current version analyzes
 
----
+```
+Paper Leak
+```
 
-## 📚 Learning Outcomes
+Future versions will support
 
-This project demonstrates practical experience with:
-
-- Natural Language Processing (NLP)
-- Transformer Models
-- Hugging Face Transformers
-- AI Pipeline Design
-- Python Project Architecture
-- Modular Software Development
+- Elections
+- Government Policies
+- Parliament
+- Operation Sindoor
+- Budget
+- Waqf Bill
+- User-defined Topics
 
 ---
 
-## 👨‍💻 Author
+# Future Roadmap
 
-**Sidhant Jain**
-
-Computer Science Engineering Student
-
-Passionate about Artificial Intelligence, Machine Learning, and Full-Stack Development.
+- News Database
+- Multi-source News Collection
+- AI Summary Generation
+- Trend Analysis
+- Dashboard
+- Charts & Visualizations
+- PDF Report Generation
+- REST API
+- Web Interface
+- Deployment
 
 ---
 
-## ⭐ If you found this project useful, consider giving it a star!
+# Tech Stack
+
+- Python
+- HuggingFace Transformers
+- KeyBERT
+- Sentence Transformers
+- Feedparser
+- Newspaper4k
+- RSS Feeds
+
+---
+
+# Developed By
+
+**NirvaLink**
+
+AI & Software Solutions
