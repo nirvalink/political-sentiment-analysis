@@ -1,16 +1,26 @@
-from app.data.sample_data import posts
-from app.services.pipeline import analyze_topic
+from app.collector.rss_collector import fetch_news
+from app.services.pipeline import analyze_article
 
-report = analyze_topic(posts)
+articles = fetch_news()
 
-print("=" * 50)
-print("PUBLIC PULSE AI")
-print("=" * 50)
+print("=" * 60)
+print("PAPER LEAK INTELLIGENCE REPORT")
+print("=" * 60)
 
-for i in range(len(posts)):
-    print(f"\nPost {i+1}")
-    print("Sentiment:", report["sentiment"][i])
-    print("Emotion :", report["emotion"][i])
+for index, article in enumerate(articles, start=1):
 
-print("\nTop Keywords")
-print(report["keywords"])
+    result = analyze_article(article["text"])
+
+    print(f"\nArticle {index}")
+    print("-" * 60)
+
+    print(f"Title      : {article['title']}")
+    print(f"Published  : {article['published']}")
+    print(f"Source     : {article['link']}")
+
+    print("\nAI ANALYSIS")
+    print(f"Sentiment  : {result['sentiment']}")
+    print(f"Emotion    : {result['emotion']}")
+    print(f"Keywords   : {result['keywords']}")
+
+    print("\n" + "=" * 60)
